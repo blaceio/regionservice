@@ -50,6 +50,18 @@ public class RegionRestController {
     }
     
     @CrossOrigin
+    @PostMapping("/regions")
+    public ResponseEntity<Region> createregions(@RequestBody List<Region> regions) {
+    		logger.info("createregions requested");
+    		
+    		for( Region region : regions) {
+    			regionrepo.save(region);
+    		}
+    		
+        return new ResponseEntity<Region>(HttpStatus.CREATED);
+    }
+    
+    @CrossOrigin
     @DeleteMapping(value = "/region")
     public ResponseEntity<Region> deleteregion(@RequestParam("deleteid") String deleteid) {
 		logger.info("deleteregion requested for " +  deleteid);
